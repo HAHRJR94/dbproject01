@@ -4,13 +4,14 @@ import { FirebaseContext } from '../firebase/context'
 const Cita = ({ cita }) => {
   const { handleDelete, setGetId } = useContext(FirebaseContext)
 
-  const { id, nombre, edad, sintomas, date, nCta } = cita
+  const { id, nombre, edad, peso, sintomas, date, nCta } = cita
 
   return (
     <tr className='text-center'>
       <td>{id}</td>
       <td>{nombre}</td>
       <td>{edad}</td>
+      <td>{peso}</td>
       <td>{sintomas}</td>
       <td>{nCta}</td>
       <td>{date}</td>

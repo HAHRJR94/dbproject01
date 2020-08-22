@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useContext } from 'react'
 import { FirebaseContext } from '../firebase/context'
 
 const AlumnoForm = () => {
+  let history = useHistory()
   const { firebase } = useContext(FirebaseContext)
 
   const [newAlumno, setAlumno] = useState({ nombre: '', noCuenta: '' })
@@ -22,6 +24,7 @@ const AlumnoForm = () => {
     firebase.alumno.collection('alumnos').add(newAlumno)
 
     setAlumno({ nombre: '', noCuenta: '' })
+    history.push('/')
   }
 
   return (

@@ -11,13 +11,14 @@ const Form = () => {
   const [paciente, setPaciente] = useState({
     nombre: '',
     edad: '',
+    peso: '',
     sintomas: '',
     nCta: '',
     alumno: '',
-    date: moment(Date.now()).format('MMMM Do YYYY')
+    date: moment(Date.now()).format('L')
   })
   const [error, setError] = useState(false)
-  const { nombre, edad, sintomas, nCta, date } = paciente
+  const { nombre, edad, peso, sintomas, nCta, date } = paciente
 
   useEffect(() => {
     if (Object.keys(update).length > 0) {
@@ -32,7 +33,7 @@ const Form = () => {
 
   //Cancela la actualización de los datos
   const handleCancelUpdate = () => {
-    setPaciente({ nombre: '', edad: '', sintomas: '', nCta: '', alumno: '' })
+    setPaciente({ nombre: '', edad: '', peso: '', sintomas: '', nCta: '', alumno: '' })
     setGetId('')
   }
 
@@ -57,12 +58,13 @@ const Form = () => {
       //Guarda el registro en la DB
       firebase.db.collection('citas').add(paciente)
     } else {
+      //Actualiza un resgistro en la DB
       firebase.db.collection('citas').doc(getId).update(paciente)
       setGetId('')
     }
-
+    
     //Reinicia los valores del formulario
-    setPaciente({ nombre: '', edad: '', sintomas: '', nCta: '' })
+    setPaciente({ nombre: '', edad: '', peso: '', sintomas: '', nCta: '' })
   }
 
   //Muestra un mensaje de error
@@ -86,8 +88,9 @@ const Form = () => {
       <div className='card mt-5 p-4'>
         <form onSubmit={handleSubmit}>
           <div className='row justify-content-between align-items-center'>
-            <h2 className='text-center text-primary mb-4 m-auto'>Crea una cita</h2>
-
+            <h2 className='text-center text-primary mb-4 m-auto'>
+              Administrador de pacientes
+            </h2>
             <img src={Logo} width='35%' alt='Logotipo' />
           </div>
           <hr />
@@ -120,7 +123,12 @@ const Form = () => {
             </div>
             <div className='col-md-3 form-group'>
               <label>Fecha</label>
-              <input className='form-control' type='text' name='date' value={date} />
+              <input
+                className='form-control text-center'
+                type='text'
+                name='date'
+                value={date}
+              />
             </div>
           </div>
           <div className='row justify-content-center mt-3'>
@@ -149,6 +157,17 @@ const Form = () => {
               value={edad}
               onChange={handleChange}
               placeholder='Edad'
+            />
+          </div>
+          <div className='form-group'>
+            <label>Peso</label>
+            <input
+              className='form-control'
+              type='text'
+              name='peso'
+              value={peso}
+              onChange={handleChange}
+              placeholder='peso'
             />
           </div>
           <div className='form-group'>

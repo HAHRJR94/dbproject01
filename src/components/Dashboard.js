@@ -14,10 +14,11 @@ const Dashboard = () => {
         <table className='table table-striped'>
           <thead className='thead-dark'>
             <tr className='text-center'>
-              <th scope='col'>id</th>
+              <th scope='col'>ID</th>
               <th scope='col'>Paciente</th>
               <th scope='col'>Edad</th>
-              <th scope='col'>sintomas</th>
+              <th scope='col'>Peso</th>
+              <th scope='col'>Sintomas</th>
               <th scope='col'>Alumno</th>
               <th scope='col'>Fecha</th>
               <th scope='col'>Actualizar</th>
